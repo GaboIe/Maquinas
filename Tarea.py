@@ -57,19 +57,39 @@ print(Lf)    # Hasta aqui, bien
 
 # Se calcula la densidad y la intensidad en el entrehierro, el aire
 Ba = Q3/Sc
+print("Q3", Q3)
+print("Sc", Sc)
+print(Ba)
 
 # Esta siempre sigue la ecuacion
-Ha = Ba/4*pi *(10 **-7)
+Ha = Ba/(4*pi *(10 **-7))
+print("HA", Ha)
 
 # Ahora se calcula la fuera electromotriz En la columna central
-Fmh = float(Lf*H3 + LE*Ba)
-
+print("H3", H3)
+print("lf",Lf)
+print("Ba", Ha)
+print("LE", LE)
+Fmh = float(H3*Lf + LE*Ha)
+print("FMH", Fmh)
 # Ahora se usa una ley de tensiones para calcular la intensidad en la parte izquierda
 # N1*I1 = H1*L1 + Fmh
 H1 = float((N1*I1*Fmh)/L1)
-
+print("H1", H1)
 # Con esta intensidad se calcula la densidad de flujo en la parte izquierda, a esto hay que agregarle condicionales
-B1 =  a*H1/(1+b*H1)
+
+if HB == 1:
+      
+    B1 = a*H1/(1+b*H1)
+
+if HB ==2:
+
+    for i in range(n-1):
+        if (H1 >= Hn[i]):
+            m = (Hn[i+1]-Hn[i])/(Bn[i+1]-Bn[i])
+            k = Hn[i] -Bn[i]*m
+            B1 = (H3 - k)/m
+print("B1", H1)
 
 # Ahora se calcula el flujo en la parte izquierda
 Q1 = B1*Sl*fp
