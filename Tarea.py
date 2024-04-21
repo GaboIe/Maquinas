@@ -66,15 +66,12 @@ Ha = Ba/(4*pi *(10 **-7))
 print("HA", Ha)
 
 # Ahora se calcula la fuera electromotriz En la columna central
-print("H3", H3)
-print("lf",Lf)
-print("Ba", Ha)
-print("LE", LE)
+
 Fmh = float(H3*Lf + LE*Ha)
 print("FMH", Fmh)
 # Ahora se usa una ley de tensiones para calcular la intensidad en la parte izquierda
 # N1*I1 = H1*L1 + Fmh
-H1 = float((N1*I1*Fmh)/L1)
+H1 = float((N1*I1-Fmh)/L1)
 print("H1", H1)
 # Con esta intensidad se calcula la densidad de flujo en la parte izquierda, a esto hay que agregarle condicionales
 
@@ -89,16 +86,19 @@ if HB ==2:
             m = (Hn[i+1]-Hn[i])/(Bn[i+1]-Bn[i])
             k = Hn[i] -Bn[i]*m
             B1 = (H3 - k)/m
-print("B1", H1)
+#print("B1", B1)
 
 # Ahora se calcula el flujo en la parte izquierda
 Q1 = B1*Sl*fp
+print("Q1", Q1)
 
 # Ahora se aplica una ley de corrientes para calcular la corriente en el flujo de la derecha
 Q2 = Q3-Q1
+print("Q2", Q2)
 
 # Con el flujo se calcula la densidad en el lado derecho de la bobina
 B2 = Q2/(Sl*fp)
+print("B2", B2)
 if HB == 1:
 
     H2 = B2/(a-B2*b)
@@ -106,9 +106,12 @@ if HB ==2:
 
     for i in range(n-1):
         if (B2 >= Bn[i]):
-                m = (Bn[i+1]-Bn[i])/(Hn[i+1]-Hn[i])
+                m = (Hn[i+1]-Hn[i])/(Bn[i+1]-Bn[i])
     k = Hn[i] -Bn[i]*m
-    H2 = m*B2+ k 
+    H2 = m*B2+ k
+print("K", k)
+print("M", m)     
 
+print("H2", H2)
 I2 = (H2*L2+Fmh)/N2
 print(I2)
